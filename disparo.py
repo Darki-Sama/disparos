@@ -18,7 +18,7 @@ class Jugador(pygame.sprite.Sprite):
         self.rect.x=pos[0]
         self.rect.y= (ALTO-self.rect.height) - 10
         self.velx=0
-        #self.vely=0
+        self.vely=0
 
     def RetPos(self):
         x=self.rect.x
@@ -27,6 +27,7 @@ class Jugador(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.x+=self.velx
+        self.rect.y+=self.vely
         #self.rect.y+=self.vely
 
 class Rival(pygame.sprite.Sprite):
@@ -110,7 +111,10 @@ if __name__ == '__main__':
         if j.rect.x > ANCHO:
             j.rect.x=0-j.rect.width
         #Colision
-
+        ls_col=pygame.sprite.spritecollide(j,rivales,True)
+        for e in ls_col:
+            ptos+=1
+        print(ptos)
         #Limpieza de memoria
         for b in balas:
             if b.rect.y < -50:
